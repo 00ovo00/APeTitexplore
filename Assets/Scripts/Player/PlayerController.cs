@@ -1,17 +1,22 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
     private Vector2 curMovementInput;
-    public float jumptForce;
+    public float jumpForce;
     public LayerMask groundLayerMask;
 
+    [Header("Size")]
+    public Transform size;
+    
     [Header("Look")]
-    public Transform cameraContainer;
+    //public Transform cameraContainer;
+    public Transform mainCamera;
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rigidbody.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -87,7 +92,8 @@ public class PlayerController : MonoBehaviour
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
-        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+        //cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+        mainCamera.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
@@ -104,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.6f, groundLayerMask))
             {
                 return true;
             }

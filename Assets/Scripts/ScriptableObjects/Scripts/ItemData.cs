@@ -41,5 +41,6 @@ public class ItemData : ScriptableObject
     // public GameObject equipPrefab;
     
     [Header("Open")]
-    public GameObject[] packedPrefab;
+    // public GameObject[] packedPrefab;
+    public ItemData[] packedPrefab;
 }

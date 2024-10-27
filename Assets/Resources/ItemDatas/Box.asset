@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8cd8e42dbb326046bb400f4218903a5, type: 3}
-  m_Name: SizeDrink
+  m_Name: Box
   m_EditorClassIdentifier: 
-  displayName: "\uC5BC\uD070\uC220"
-  description: "\uAE30\uBD84\uC774 \uC88B\uC544\uC838 \uD06C\uAE30\uAC00 \uC77C\uC2DC\uC801\uC73C\uB85C
-    \uCEE4\uC9D1\uB2C8\uB2E4"
-  type: 1
+  displayName: "\uC0C1\uC790"
+  description: "\uBB34\uC5C7\uC778\uAC00 \uB4E4\uC5B4\uC788\uC2B5\uB2C8\uB2E4"
+  type: 2
   icon: {fileID: 0}
-  canStack: 1
-  maxStackAmount: 10
-  consumables:
-  - type: 1
-    value: 90
-  packedPrefab: []
+  canStack: 0
+  maxStackAmount: 0
+  consumables: []
+  packedPrefab:
+  - {fileID: 11400000, guid: 25437fd3ccec8a64b81c9c1cc204115f, type: 2}
+  - {fileID: 11400000, guid: c2dd0279968a86b4d9d0ee9eadd56601, type: 2}
