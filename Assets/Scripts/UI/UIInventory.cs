@@ -14,6 +14,7 @@ public class UIInventory : MonoBehaviour
     [Header("Selected Item")]
     private ItemSlot selectedItem;
     private int selectedItemIndex;
+    public ItemData defualtItem;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatName;
@@ -50,6 +51,17 @@ public class UIInventory : MonoBehaviour
         }
 
         ClearSelectedItemWindow();
+        AddStartingItems();
+        UpdateUI();
+    }
+    
+    private void AddStartingItems()
+    {
+        ItemData defaultItem = defualtItem;
+        int defaultQuantity = 50;
+
+        slots[0].item = defaultItem;
+        slots[0].quantity = defaultQuantity;
     }
 
     public void Toggle()
@@ -185,9 +197,11 @@ public class UIInventory : MonoBehaviour
                 switch (selectedItem.item.consumables[i].type)
                 {
                     case ConsumableType.Health:
-                        condition.Heal(selectedItem.item.consumables[i].value); break;
-                    // case ConsumableType.Hunger:
-                    //     condition.Eat(selectedItem.item.consumables[i].value);break;
+                        condition.Heal(selectedItem.item.consumables[i].value);
+                        break;
+                    case ConsumableType.Duration:
+                        StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value));
+                        break;
                 }
             }
             RemoveSelctedItem();
