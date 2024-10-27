@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public interface IDamagable
 {
@@ -13,6 +14,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public UICondition uiCondition;
 
     Condition health { get { return uiCondition.health; } }
+    Condition size { get { return uiCondition.size; } }
 
     public event Action onTakeDamage;
 
@@ -47,15 +49,19 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke();
     }
     
-    public IEnumerator ScaleChange(float duration)
+    public IEnumerator ScaleChange(float duration, GameObject useButton)
     {
         Vector3 originalScale = playerController.size.localScale;
-        Vector3 originalPos = playerController.mainCamera.position;
-        playerController.mainCamera.transform.position = new Vector3(originalPos.x, originalPos.y * 0.25f, originalPos.z);
+        Vector3 originalPos = playerController.mainCamera.localPosition;
+        playerController.mainCamera.transform.localPosition = new Vector3(originalPos.x, originalPos.y * 1.5f, originalPos.z);
         transform.localScale = originalScale * 2;
+        StartCoroutine(size.DecreaseTime(duration));
+
         yield return new WaitForSeconds(duration);
 
         transform.localScale = originalScale;
-        playerController.mainCamera.transform.position = new Vector3(originalPos.x, originalPos.y, originalPos.z);
+        playerController.mainCamera.transform.localPosition = new Vector3(originalPos.x, originalPos.y, originalPos.z);
+        CharacterManager.Instance.Player.isBig = false;
+        useButton.SetActive(true);
     }
 }

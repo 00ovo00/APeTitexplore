@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public Transform size;
     
     [Header("Look")]
-    public Transform cameraContainer;
+    //public Transform cameraContainer;
     public Transform mainCamera;
     public float minXLook;
     public float maxXLook;
@@ -92,7 +92,8 @@ public class PlayerController : MonoBehaviour
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
-        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+        //cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+        mainCamera.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.6f, groundLayerMask))
             {
                 return true;
             }
