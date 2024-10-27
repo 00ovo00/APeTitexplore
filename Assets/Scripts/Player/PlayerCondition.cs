@@ -41,6 +41,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+        GameManager.Instance.GameOver(); 
     }
 
     public void TakePhysicalDamage(int damageAmount)
