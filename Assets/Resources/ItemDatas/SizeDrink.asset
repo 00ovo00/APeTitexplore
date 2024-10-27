@@ -18,8 +18,8 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 0}
   canStack: 1
-  maxStackAmount: 10
+  maxStackAmount: 30
   consumables:
   - type: 1
-    value: 10
+    value: 90
   packedPrefab: []
