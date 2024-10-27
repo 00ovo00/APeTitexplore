@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
+    public float jumpPadForce;
     public LayerMask groundLayerMask;
 
     [Header("Size")]
@@ -133,5 +134,13 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("JumpPad"))
+        {
+            rigidbody.AddForce(Vector2.up * jumpPadForce, ForceMode.Impulse);
+        }
     }
 }
