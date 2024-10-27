@@ -106,9 +106,12 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
+        Debug.Log(data);
         if (data.canStack)
         {
             ItemSlot slot = GetItemStack(data);
+            Debug.Log(slot.name);
+
             if(slot != null)
             {
                 slot.quantity++;
@@ -179,7 +182,7 @@ public class UIInventory : MonoBehaviour
     {
         for(int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
+            if (slots[i].item == data && slots[i].quantity <= data.maxStackAmount)
             {
                 return slots[i];
             }
@@ -219,7 +222,7 @@ public class UIInventory : MonoBehaviour
         }
 
         useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
-        openButton.SetActive(selectedItem.item.type == ItemType.Openable && !CharacterManager.Instance.Player.isBig);
+        openButton.SetActive(selectedItem.item.type == ItemType.Openable);
     }
 
     void ClearSelectedItemWindow()

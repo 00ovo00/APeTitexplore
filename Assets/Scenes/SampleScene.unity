@@ -1382,6 +1382,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   condition: {fileID: 0}
   transform: {fileID: 0}
+  isBig: 0
   itemData: {fileID: 0}
 --- !u!114 &303124712
 MonoBehaviour:
@@ -12903,7 +12904,6 @@ GameObject:
   - component: {fileID: 6915638133199650235}
   - component: {fileID: 8618458689762545761}
   - component: {fileID: 4941949483117838358}
-  - component: {fileID: 8381366906631894909}
   - component: {fileID: 8618458689762545762}
   m_Layer: 5
   m_Name: InventoryCanvas
@@ -13328,18 +13328,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8381366906631894909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594574736682007359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &8497874003600499796
 CanvasRenderer:
   m_ObjectHideFlags: 0
