@@ -1,17 +1,22 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
     private Vector2 curMovementInput;
-    public float jumptForce;
+    public float jumpForce;
     public LayerMask groundLayerMask;
 
+    [Header("Size")]
+    public Transform size;
+    
     [Header("Look")]
     public Transform cameraContainer;
+    public Transform mainCamera;
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rigidbody.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
         }
     }
 

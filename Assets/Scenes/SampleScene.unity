@@ -1357,11 +1357,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  jumptForce: 25
+  jumpForce: 25
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 55
+  size: {fileID: 303124706}
   cameraContainer: {fileID: 1154919619}
+  mainCamera: {fileID: 963194228}
   minXLook: -85
   maxXLook: 85
   lookSensitivity: 0.02
@@ -1394,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43f2055082ce494fa62093c2a12cc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   uiCondition: {fileID: 0}
 --- !u!114 &303124713
 MonoBehaviour:
@@ -5843,7 +5846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 352725736}
-  size: {fileID: 0}
+  size: {fileID: 793874700}
 --- !u!1001 &1447519791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11963,7 +11966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8381366906631894909}
+      - m_Target: {fileID: 8618458689762545762}
         m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
         m_MethodName: OnUseButton
         m_Mode: 1
@@ -13424,6 +13427,7 @@ MonoBehaviour:
   slots: []
   inventoryWindow: {fileID: 2867428711147241442}
   slotPanel: {fileID: 7804447901179761983}
+  defualtItem: {fileID: 11400000, guid: 6c0d3c0b691e7b543ac6e90bdf45b30b, type: 2}
   selectedItemName: {fileID: 8879582019009112957}
   selectedItemDescription: {fileID: 8126961554380685847}
   selectedItemStatName: {fileID: 6519799052280927481}

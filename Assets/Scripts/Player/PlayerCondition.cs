@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IDamagable
@@ -8,11 +9,17 @@ public interface IDamagable
 
 public class PlayerCondition : MonoBehaviour, IDamagable
 {
+    public PlayerController playerController;
     public UICondition uiCondition;
 
     Condition health { get { return uiCondition.health; } }
 
     public event Action onTakeDamage;
+
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     private void Update()
     {
@@ -29,11 +36,6 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         health.Add(amount);
     }
 
-    public void Drink(float amount)
-    {
-        health.Add(amount);
-    }
-
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
@@ -43,5 +45,17 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+    }
+    
+    public IEnumerator ScaleChange(float duration)
+    {
+        Vector3 originalScale = playerController.size.localScale;
+        Vector3 originalPos = playerController.mainCamera.position;
+        playerController.mainCamera.transform.position = new Vector3(originalPos.x, originalPos.y * 0.25f, originalPos.z);
+        transform.localScale = originalScale * 2;
+        yield return new WaitForSeconds(duration);
+
+        transform.localScale = originalScale;
+        playerController.mainCamera.transform.position = new Vector3(originalPos.x, originalPos.y, originalPos.z);
     }
 }

@@ -21,5 +21,5 @@ MonoBehaviour:
   maxStackAmount: 10
   consumables:
   - type: 1
-    value: 90
+    value: 10
   packedPrefab: []
