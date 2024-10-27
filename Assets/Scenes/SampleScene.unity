@@ -1181,7 +1181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4882229428381789}
-  - {fileID: 1154919619}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &303124707
@@ -1362,7 +1362,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   size: {fileID: 303124706}
-  cameraContainer: {fileID: 1154919619}
   mainCamera: {fileID: 963194228}
   minXLook: -85
   maxXLook: 85
@@ -3410,9 +3409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  maxValue: 0.5
+  maxValue: 90
   startValue: 0
-  passiveValue: 0
+  passiveValue: 1
   uiBar: {fileID: 317526269}
 --- !u!114 &793874701
 MonoBehaviour:
@@ -4265,11 +4264,11 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1154919619}
+  m_Father: {fileID: 303124706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &983104058
 PrefabInstance:
@@ -4749,38 +4748,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4018134027799990, guid: 68fb1831576b9714795637b051034356, type: 3}
   m_PrefabInstance: {fileID: 1135255833}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1154919618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1154919619}
-  m_Layer: 6
-  m_Name: CameraContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1154919619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154919618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 963194228}
-  m_Father: {fileID: 303124706}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1159929549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13427,7 +13394,6 @@ MonoBehaviour:
   slots: []
   inventoryWindow: {fileID: 2867428711147241442}
   slotPanel: {fileID: 7804447901179761983}
-  defualtItem: {fileID: 11400000, guid: 6c0d3c0b691e7b543ac6e90bdf45b30b, type: 2}
   selectedItemName: {fileID: 8879582019009112957}
   selectedItemDescription: {fileID: 8126961554380685847}
   selectedItemStatName: {fileID: 6519799052280927481}
@@ -13533,9 +13499,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8381366906631894909}
+      - m_Target: {fileID: 8618458689762545762}
         m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
-        m_MethodName: OnEquipButton
+        m_MethodName: OnOpenButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

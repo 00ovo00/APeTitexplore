@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +16,7 @@ public class UIInventory : MonoBehaviour
     [Header("Selected Item")]
     private ItemSlot selectedItem;
     private int selectedItemIndex;
-    public ItemData defualtItem;
+//    public ItemData defualtItem;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatName;
@@ -25,10 +27,17 @@ public class UIInventory : MonoBehaviour
     // public GameObject unEquipButton;
     // public GameObject dropButton;
 
+    private Dictionary<ItemData, int> defualtItems;
+    
     private int curEquipIndex;
 
     private PlayerController controller;
     private PlayerCondition condition;
+
+    private void Awake()
+    {
+        SetStartItemData();
+    }
 
     void Start()
     {
@@ -54,14 +63,26 @@ public class UIInventory : MonoBehaviour
         AddStartingItems();
         UpdateUI();
     }
+
+    private void SetStartItemData()
+    {
+        defualtItems = new Dictionary<ItemData, int>();
+        ItemData itemData = Resources.Load("ItemDatas/HealthDrink") as ItemData;
+        defualtItems.Add(itemData, 50);
+        
+        itemData = Resources.Load("ItemDatas/SizeDrink") as ItemData;
+        defualtItems.Add(itemData, 10);
+    }
     
     private void AddStartingItems()
     {
-        ItemData defaultItem = defualtItem;
-        int defaultQuantity = 50;
-
-        slots[0].item = defaultItem;
-        slots[0].quantity = defaultQuantity;
+        int i = 0;
+        foreach (var defualtItem in defualtItems)
+        {
+            slots[i].item = defualtItem.Key;
+            slots[i].quantity = defualtItem.Value;
+            i++;
+        }
     }
 
     public void Toggle()
@@ -85,6 +106,34 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
+        if (data.canStack)
+        {
+            ItemSlot slot = GetItemStack(data);
+            if(slot != null)
+            {
+                slot.quantity++;
+                UpdateUI();
+                CharacterManager.Instance.Player.itemData = null;
+                return;
+            }
+        }
+
+        ItemSlot emptySlot = GetEmptySlot();
+
+        if(emptySlot != null)
+        {
+            emptySlot.item = data;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            CharacterManager.Instance.Player.itemData = null;
+            return;
+        }
+
+        CharacterManager.Instance.Player.itemData = null;
+    }
+    
+    public void AddItem(ItemData data)
+    {
         if (data.canStack)
         {
             ItemSlot slot = GetItemStack(data);
@@ -170,6 +219,7 @@ public class UIInventory : MonoBehaviour
         }
 
         useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+        openButton.SetActive(selectedItem.item.type == ItemType.Openable && !CharacterManager.Instance.Player.isBig);
     }
 
     void ClearSelectedItemWindow()
@@ -200,9 +250,31 @@ public class UIInventory : MonoBehaviour
                         condition.Heal(selectedItem.item.consumables[i].value);
                         break;
                     case ConsumableType.Duration:
-                        StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value));
+                        CharacterManager.Instance.Player.isBig = true;
+                        useButton.SetActive(false);
+                        StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value, useButton));
                         break;
                 }
+            }
+            RemoveSelctedItem();
+        }
+    }
+    
+    public void OnOpenButton()
+    {
+        if(selectedItem.item.type == ItemType.Openable)
+        {
+            for(int i = 0; i < selectedItem.item.packedPrefab.Length; i++)
+            {
+                // switch (selectedItem.item.packedPrefab[i].type)
+                // {
+                //     case ItemType.Consumable:
+                //         break;
+                //     case ItemType.Resource:
+                //         StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value));
+                //         break;
+                // }
+                AddItem(selectedItem.item.packedPrefab[i]);
             }
             RemoveSelctedItem();
         }

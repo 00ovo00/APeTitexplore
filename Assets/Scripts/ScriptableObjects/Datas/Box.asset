@@ -19,4 +19,6 @@ MonoBehaviour:
   canStack: 0
   maxStackAmount: 0
   consumables: []
-  packedPrefab: []
+  packedPrefab:
+  - {fileID: 11400000, guid: 25437fd3ccec8a64b81c9c1cc204115f, type: 2}
+  - {fileID: 11400000, guid: c2dd0279968a86b4d9d0ee9eadd56601, type: 2}

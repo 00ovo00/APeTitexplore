@@ -18,7 +18,7 @@ MonoBehaviour:
   type: 1
   icon: {fileID: 0}
   canStack: 1
-  maxStackAmount: 20
+  maxStackAmount: 10
   consumables:
   - type: 1
     value: 10

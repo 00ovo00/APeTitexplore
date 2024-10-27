@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public PlayerController controller;
     public PlayerCondition condition;
     public Transform transform;
+    public bool isBig;
     
     public ItemData itemData;
     public Action addItem;
@@ -16,5 +17,6 @@ public class Player : MonoBehaviour
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
         transform = GetComponent<Transform>();
+        isBig = false;
     }
 }
