@@ -5,6 +5,7 @@ public enum ItemType
     Resource,
     Consumable,
     Openable,
+    Readable,
 }
 
 public enum ConsumableType

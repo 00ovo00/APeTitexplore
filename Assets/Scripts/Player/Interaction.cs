@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +14,8 @@ public class Interaction : MonoBehaviour
     public float checkRate = 0.05f;
     private float lastCheckTime;
     public float maxCheckDistance;
-    public LayerMask layerMask;
+    private int interactsLayerMask;
+    private int sheetLayerMask;
     private string guideStr;
 
     public GameObject curInteractGameObject;
@@ -21,7 +23,12 @@ public class Interaction : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     private Camera camera;
-    
+
+    private void Awake()
+    {
+        interactsLayerMask = 1 << LayerMask.NameToLayer("Interactable");
+        sheetLayerMask =  1 << LayerMask.NameToLayer("Sheet"); 
+    }
 
     void Start()
     {
@@ -39,13 +46,25 @@ public class Interaction : MonoBehaviour
             Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+            if(Physics.Raycast(ray, out hit, maxCheckDistance, interactsLayerMask))
             {
                 if(hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;
                     curInteractable = hit.collider.GetComponent<IInteractable>();
                     SetPromptText();
+                    return;
+                }
+            }
+            if(Physics.Raycast(ray, out hit, maxCheckDistance, sheetLayerMask))
+            {
+                if(hit.collider.gameObject != curInteractGameObject)
+                {
+                    curInteractGameObject = hit.collider.gameObject;
+                    curInteractable = hit.collider.GetComponent<IInteractable>();
+                    promptText.gameObject.SetActive(true);
+                    promptText.text = "[X] 문서 보기";                    
+                    return;
                 }
             }
             else
@@ -64,6 +83,16 @@ public class Interaction : MonoBehaviour
     }
 
     public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractGameObject = null;
+            curInteractable = null;
+            promptText.gameObject.SetActive(false);
+        }
+    }
+    public void OnPopUpInput(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started && curInteractable != null)
         {
