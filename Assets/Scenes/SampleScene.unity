@@ -1181,7 +1181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4882229428381789}
-  - {fileID: 1154919619}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &303124707
@@ -1357,11 +1357,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  jumptForce: 25
+  jumpForce: 25
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 55
-  cameraContainer: {fileID: 1154919619}
+  size: {fileID: 303124706}
+  mainCamera: {fileID: 963194228}
   minXLook: -85
   maxXLook: 85
   lookSensitivity: 0.02
@@ -1381,6 +1382,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   condition: {fileID: 0}
   transform: {fileID: 0}
+  isBig: 0
   itemData: {fileID: 0}
 --- !u!114 &303124712
 MonoBehaviour:
@@ -1394,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43f2055082ce494fa62093c2a12cc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   uiCondition: {fileID: 0}
 --- !u!114 &303124713
 MonoBehaviour:
@@ -3407,9 +3410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  maxValue: 0.5
+  maxValue: 90
   startValue: 0
-  passiveValue: 0
+  passiveValue: 1
   uiBar: {fileID: 317526269}
 --- !u!114 &793874701
 MonoBehaviour:
@@ -4262,11 +4265,11 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1154919619}
+  m_Father: {fileID: 303124706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &983104058
 PrefabInstance:
@@ -4746,38 +4749,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4018134027799990, guid: 68fb1831576b9714795637b051034356, type: 3}
   m_PrefabInstance: {fileID: 1135255833}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1154919618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1154919619}
-  m_Layer: 6
-  m_Name: CameraContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1154919619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154919618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 963194228}
-  m_Father: {fileID: 303124706}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1159929549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5843,7 +5814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 352725736}
-  size: {fileID: 0}
+  size: {fileID: 793874700}
 --- !u!1001 &1447519791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11963,7 +11934,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8381366906631894909}
+      - m_Target: {fileID: 8618458689762545762}
         m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
         m_MethodName: OnUseButton
         m_Mode: 1
@@ -12933,7 +12904,6 @@ GameObject:
   - component: {fileID: 6915638133199650235}
   - component: {fileID: 8618458689762545761}
   - component: {fileID: 4941949483117838358}
-  - component: {fileID: 8381366906631894909}
   - component: {fileID: 8618458689762545762}
   m_Layer: 5
   m_Name: InventoryCanvas
@@ -13358,18 +13328,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8381366906631894909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594574736682007359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &8497874003600499796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13529,9 +13487,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8381366906631894909}
+      - m_Target: {fileID: 8618458689762545762}
         m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
-        m_MethodName: OnEquipButton
+        m_MethodName: OnOpenButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
