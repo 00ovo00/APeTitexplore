@@ -16,6 +16,7 @@ MonoBehaviour:
   description: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
   type: 1
   icon: {fileID: 0}
+  hasDuration: 0
   canStack: 1
   maxStackAmount: 100
   consumables:
