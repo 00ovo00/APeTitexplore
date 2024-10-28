@@ -11,6 +11,8 @@ public class UISheet : MonoBehaviour
     public TMP_InputField keyInputField;
     private List<string> keyStringList;
 
+    public Action OnSheetClose;
+
     private void Awake()
     {
         keyStringList = new List<string>();
@@ -31,12 +33,8 @@ public class UISheet : MonoBehaviour
 
     public void OnConfirm()
     {
-        Debug.Log("Clicked");
         if (keyInputField == null) return;
-        Debug.Log("Clicked");
         string inputStr = keyInputField.text.ToUpper();
-        Debug.Log(inputStr);
-
         foreach (var str in keyStringList)
         {
             Debug.Log(str);
@@ -52,5 +50,6 @@ public class UISheet : MonoBehaviour
     public void OnCancel()
     {
         UIManager.Instance.DeActivateSheetPanel();
+        CharacterManager.Instance.Player.controller.ToggleCursor();
     }
 }

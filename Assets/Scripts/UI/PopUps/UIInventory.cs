@@ -221,8 +221,11 @@ public class UIInventory : MonoBehaviour
             selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString() + "\n";
         }
 
-        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
         openButton.SetActive(selectedItem.item.type == ItemType.Openable);
+        if (selectedItem.item.hasDuration && CharacterManager.Instance.Player.isBig)
+            useButton.SetActive(false);
+        else
+            useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
     }
 
     void ClearSelectedItemWindow()
