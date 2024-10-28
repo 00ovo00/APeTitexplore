@@ -7,7 +7,10 @@ public class ItemObject : MonoBehaviour, IInteractable
     public string GetInteractPrompt()
     {
         string str = $"{data.displayName}\n{data.description}";
-        return str;
+        if (data.type == ItemType.Readable)
+            return str;
+        string guideStr = "[E] 줍줍\n";
+        return guideStr + str;
     }
 
     public void OnInteract()

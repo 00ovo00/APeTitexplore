@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 0A
   type: 0
   icon: {fileID: 0}
+  hasDuration: 0
   canStack: 0
   maxStackAmount: 0
   consumables: []

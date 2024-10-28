@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        // TODO : OnSheetClose += Toggle();
     }
 
     private void FixedUpdate()
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ToggleCursor()
+    public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
