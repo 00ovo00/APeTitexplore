@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -41,6 +43,12 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnGameClear += ActivateGameClearPanel;
     }
 
+    private void Start()
+    {
+        GameClearPanel.SetActive(false);   
+        GameOverPanel.SetActive(false);   
+    }
+
     private void OnDisable()
     {
         if (GameManager.Instance != null)
@@ -57,5 +65,27 @@ public class UIManager : MonoBehaviour
     public void ActivateGameClearPanel()
     {
         GameClearPanel.SetActive(true);
+    }
+    public void ActivateSheetPanel()
+    {
+        SheetPanel.SetActive(true);
+    }
+    public void DeActivateSheetPanel()
+    {
+        SheetPanel.SetActive(false);
+    }
+
+    public void OnRetry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnQuit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif    
     }
 }

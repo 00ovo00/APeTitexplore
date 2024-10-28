@@ -1,24 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UISheet : MonoBehaviour
 {
-    public InputField keyInputField;
+    public GameObject SheetPanel;
+    public TMP_InputField keyInputField;
     private List<string> keyStringList;
 
     private void Awake()
     {
-        keyInputField = GetComponent<InputField>();
         keyStringList = new List<string>();
     }
 
     void Start()
     {
         keyStringList.Add("APT");   
-        keyStringList.Add("아파트");   
+        keyStringList.Add("아파트");
+        
+        SheetPanel.SetActive(false);
     }
 
     void Update()
@@ -28,14 +31,26 @@ public class UISheet : MonoBehaviour
 
     public void OnConfirm()
     {
+        Debug.Log("Clicked");
+        if (keyInputField == null) return;
+        Debug.Log("Clicked");
         string inputStr = keyInputField.text.ToUpper();
+        Debug.Log(inputStr);
+
         foreach (var str in keyStringList)
         {
+            Debug.Log(str);
+            Debug.Log(str == inputStr);
             if (str == inputStr)
             {
                 GameManager.Instance.GameClear(); 
                 return;
             }
         }
+    }
+
+    public void OnCancel()
+    {
+        UIManager.Instance.DeActivateSheetPanel();
     }
 }
