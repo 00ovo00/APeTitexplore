@@ -1093,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &241265240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1573,7 +1573,7 @@ Transform:
   m_GameObject: {fileID: 303124702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.917, y: 6.399, z: -1.6}
+  m_LocalPosition: {x: 0, y: 6.5, z: -5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1736,6 +1736,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 08d01efa-99b3-4c44-8b47-f6cd559bbe38
     m_ActionName: Player/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 303124710}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPopUpButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 07ce904f-c83a-439e-9870-994364bc3b33
+    m_ActionName: Player/Read[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PlayerControls
   m_DefaultActionMap: Player
@@ -1811,6 +1827,7 @@ MonoBehaviour:
   checkRate: 0.05
   maxCheckDistance: 3
   curInteractGameObject: {fileID: 0}
+  playerController: {fileID: 0}
   promptText: {fileID: 1557898308}
 --- !u!1 &313279987
 GameObject:
@@ -2248,10 +2265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e5cc0c3f212db4fb4c057fa1f8eac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curValue: 500
-  maxValue: 500
-  startValue: 500
-  passiveValue: 2
+  curValue: 100
+  maxValue: 100
+  startValue: 100
+  passiveValue: 1
   uiBar: {fileID: 1412139151}
 --- !u!1001 &358555302
 PrefabInstance:
@@ -3100,7 +3117,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 464027400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1773691495}
+        m_TargetAssemblyTypeName: UISheet, Assembly-CSharp
+        m_MethodName: OnCancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &464027400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4061,7 +4090,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 664174036}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1623242689}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &664174036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5262,7 +5303,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 923020759}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1623242689}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnRetry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &923020759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6486,7 +6539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1206224403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6521,7 +6574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7131,7 +7184,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1333269117}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1773691495}
+        m_TargetAssemblyTypeName: UISheet, Assembly-CSharp
+        m_MethodName: OnConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1333269117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9457,13 +9522,14 @@ GameObject:
   - component: {fileID: 1773691492}
   - component: {fileID: 1773691494}
   - component: {fileID: 1773691493}
+  - component: {fileID: 1773691495}
   m_Layer: 0
   m_Name: SheetPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1773691492
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9525,6 +9591,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773691491}
   m_CullTransparentMesh: 1
+--- !u!114 &1773691495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773691491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f81a375f3eae7f41b430c1bf7d3d82d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SheetPanel: {fileID: 1773691491}
+  keyInputField: {fileID: 1923897917}
 --- !u!1 &1820253187
 GameObject:
   m_ObjectHideFlags: 0
@@ -14381,7 +14461,7 @@ GameObject:
   - component: {fileID: 2392965519821944923}
   - component: {fileID: 8734240224959006492}
   - component: {fileID: 8734240224959006493}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: SM_Prop_Plans_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

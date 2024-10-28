@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd8e42dbb326046bb400f4218903a5, type: 3}
   m_Name: Sheet
   m_EditorClassIdentifier: 
-  displayName: "\uD3C9\uBA74\uB3C4"
-  description: "\uBB34\uC5B8\uAC00 \uC801\uD600\uC788\uB2E4"
+  displayName: '[X]'
+  description: " \uBB38\uC11C \uBCF4\uAE30"
   type: 3
   icon: {fileID: 0}
   canStack: 0
