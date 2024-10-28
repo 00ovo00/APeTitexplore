@@ -15,8 +15,6 @@ public class Interaction : MonoBehaviour
     private float lastCheckTime;
     public float maxCheckDistance;
     private int interactsLayerMask;
-    private int sheetLayerMask;
-    private string guideStr;
 
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
@@ -29,17 +27,14 @@ public class Interaction : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         interactsLayerMask = 1 << LayerMask.NameToLayer("Interactable");
-        sheetLayerMask =  1 << LayerMask.NameToLayer("Sheet"); 
     }
 
     void Start()
     {
         playerController.sheet += OnPopUpInput;
         camera = Camera.main;
-        guideStr = "줍줍 [E]\n";
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Time.time - lastCheckTime > checkRate)
@@ -59,17 +54,6 @@ public class Interaction : MonoBehaviour
                     return;
                 }
             }
-            // if(Physics.Raycast(ray, out hit, maxCheckDistance, sheetLayerMask))
-            // {
-            //     if(hit.collider.gameObject != curInteractGameObject)
-            //     {
-            //         curInteractGameObject = hit.collider.gameObject;
-            //         curInteractable = hit.collider.GetComponent<IInteractable>();
-            //         promptText.gameObject.SetActive(true);
-            //         promptText.text = "[X] 문서 보기";                    
-            //         return;
-            //     }
-            // }
             else
             {
                 curInteractGameObject = null;
@@ -82,7 +66,7 @@ public class Interaction : MonoBehaviour
     private void SetPromptText()
     {
         promptText.gameObject.SetActive(true);
-        promptText.text = guideStr + curInteractable.GetInteractPrompt();
+        promptText.text = curInteractable.GetInteractPrompt();
     }
 
     public void OnInteractInput(InputAction.CallbackContext context)
