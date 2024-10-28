@@ -38,16 +38,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        Time.timeScale = 1.0f;
-    }
-
     public void GameOver()
     {
         Time.timeScale = 0.0f;
         OnGameOver?.Invoke();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene());
     }
 
     public void GameClear()

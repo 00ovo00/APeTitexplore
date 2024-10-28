@@ -21,17 +21,20 @@ public class Interaction : MonoBehaviour
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
 
+    public PlayerController playerController;
     public TextMeshProUGUI promptText;
     private Camera camera;
 
     private void Awake()
     {
+        playerController = GetComponent<PlayerController>();
         interactsLayerMask = 1 << LayerMask.NameToLayer("Interactable");
         sheetLayerMask =  1 << LayerMask.NameToLayer("Sheet"); 
     }
 
     void Start()
     {
+        playerController.sheet += OnPopUpInput;
         camera = Camera.main;
         guideStr = "줍줍 [E]\n";
     }
@@ -56,17 +59,17 @@ public class Interaction : MonoBehaviour
                     return;
                 }
             }
-            if(Physics.Raycast(ray, out hit, maxCheckDistance, sheetLayerMask))
-            {
-                if(hit.collider.gameObject != curInteractGameObject)
-                {
-                    curInteractGameObject = hit.collider.gameObject;
-                    curInteractable = hit.collider.GetComponent<IInteractable>();
-                    promptText.gameObject.SetActive(true);
-                    promptText.text = "[X] 문서 보기";                    
-                    return;
-                }
-            }
+            // if(Physics.Raycast(ray, out hit, maxCheckDistance, sheetLayerMask))
+            // {
+            //     if(hit.collider.gameObject != curInteractGameObject)
+            //     {
+            //         curInteractGameObject = hit.collider.gameObject;
+            //         curInteractable = hit.collider.GetComponent<IInteractable>();
+            //         promptText.gameObject.SetActive(true);
+            //         promptText.text = "[X] 문서 보기";                    
+            //         return;
+            //     }
+            // }
             else
             {
                 curInteractGameObject = null;
@@ -92,14 +95,11 @@ public class Interaction : MonoBehaviour
             promptText.gameObject.SetActive(false);
         }
     }
-    public void OnPopUpInput(InputAction.CallbackContext context)
+    public void OnPopUpInput()
     {
-        if(context.phase == InputActionPhase.Started && curInteractable != null)
-        {
-            curInteractable.OnInteract();
-            curInteractGameObject = null;
-            curInteractable = null;
-            promptText.gameObject.SetActive(false);
-        }
+        UIManager.Instance.ActivateSheetPanel();
+        curInteractGameObject = null;
+        curInteractable = null;
+        promptText.gameObject.SetActive(false);
     }
 }

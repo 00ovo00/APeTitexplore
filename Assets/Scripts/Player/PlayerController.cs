@@ -31,10 +31,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     
     public Action inventory;
+    public Action sheet;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        Time.timeScale = 1.0f;
     }
 
     void Start()
@@ -125,6 +127,14 @@ public class PlayerController : MonoBehaviour
         if (callbackContext.phase == InputActionPhase.Started)
         {
             inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+    public void OnPopUpButton(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            sheet?.Invoke();
             ToggleCursor();
         }
     }
