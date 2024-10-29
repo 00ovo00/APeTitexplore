@@ -1,39 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    private static UIManager _instance;
-    public static UIManager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                _instance = new GameObject("UIManager").AddComponent<UIManager>();
-            }
-            return _instance;
-        }
-    }
     public GameObject GameOverPanel;
     public GameObject GameClearPanel;
     public GameObject SheetPanel;
-    
-    private void Awake()
-    {
-        if(_instance == null)
-        {
-            _instance = this;
-            return;
-        }
-        else
-        {
-            if(_instance != this)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
     
     private void OnEnable()
     {
