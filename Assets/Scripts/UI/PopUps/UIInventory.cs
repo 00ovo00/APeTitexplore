@@ -11,23 +11,18 @@ public class UIInventory : MonoBehaviour
 
     public GameObject inventoryWindow;
     public Transform slotPanel;
-    //public Transform dropPosition;
 
     [Header("Selected Item")]
     private ItemSlot selectedItem;
     private int selectedItemIndex;
-//    public ItemData defualtItem;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatName;
     public TextMeshProUGUI selectedItemStatValue;
     public GameObject useButton;
     public GameObject openButton;
-    // public GameObject equipButton;
-    // public GameObject unEquipButton;
-    // public GameObject dropButton;
 
-    private Dictionary<ItemData, int> defualtItems;
+    private Dictionary<ItemData, int> defaultItems;
     
     private int curEquipIndex;
 
@@ -39,11 +34,10 @@ public class UIInventory : MonoBehaviour
         SetStartItemData();
     }
 
-    void Start()
+    private void Start()
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
-      //  dropPosition = CharacterManager.Instance.Player.dropPosition;
 
         controller.inventory += Toggle;
         CharacterManager.Instance.Player.OnAddItem += AddItem;
@@ -66,18 +60,19 @@ public class UIInventory : MonoBehaviour
 
     private void SetStartItemData()
     {
-        defualtItems = new Dictionary<ItemData, int>();
+        // 시작 시 기본으로 인벤토리에 가지고 있는 아이템 정보 세팅
+        defaultItems = new Dictionary<ItemData, int>();
         ItemData itemData = Resources.Load("ItemDatas/HealthDrink") as ItemData;
-        defualtItems.Add(itemData, 50);
+        defaultItems.Add(itemData, 50);
         
         itemData = Resources.Load("ItemDatas/SizeDrink") as ItemData;
-        defualtItems.Add(itemData, 10);
+        defaultItems.Add(itemData, 10);
     }
     
     private void AddStartingItems()
     {
         int i = 0;
-        foreach (var defualtItem in defualtItems)
+        foreach (var defualtItem in defaultItems)
         {
             slots[i].item = defualtItem.Key;
             slots[i].quantity = defualtItem.Value;
@@ -85,7 +80,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    public void Toggle()
+    private void Toggle()
     {
         if (inventoryWindow.activeInHierarchy)
         {
@@ -102,29 +97,31 @@ public class UIInventory : MonoBehaviour
         return inventoryWindow.activeInHierarchy;
     }
 
-    public void AddItem()
+    private void AddItem()
     {
+        // 현재 상호작용 중인 아이템 정보 가져오기
         ItemData data = CharacterManager.Instance.Player.itemData;
 
-        Debug.Log(data);
-        if (data.canStack)
+        if (data.canStack)  // 중복 가능한 아이템이면
         {
-            ItemSlot slot = GetItemStack(data);
-            Debug.Log(slot.name);
+            ItemSlot slot = GetItemStack(data); // 아이템 정보 가져오기
 
-            if(slot != null)
+            if(slot != null)    // 최대 개수보다 적으면
             {
+                // 수량만 더해주고 UI 갱신
                 slot.quantity++;
                 UpdateUI();
+                // 현재 상호작용 중인 아이템 없는 상태로 만듦
                 CharacterManager.Instance.Player.itemData = null;
                 return;
             }
         }
-
+        // 아이템 슬롯이 비어있으면 빈 슬롯 세팅
         ItemSlot emptySlot = GetEmptySlot();
 
-        if(emptySlot != null)
+        if(emptySlot != null)   // 슬롯에 아이템이 있으면
         {
+            // 아이템 데이터와 수량을 UI에 갱신
             emptySlot.item = data;
             emptySlot.quantity = 1;
             UpdateUI();
@@ -135,7 +132,7 @@ public class UIInventory : MonoBehaviour
         CharacterManager.Instance.Player.itemData = null;
     }
     
-    public void AddItem(ItemData data)
+    private void AddItem(ItemData data)
     {
         if (data.canStack)
         {
@@ -163,7 +160,7 @@ public class UIInventory : MonoBehaviour
         CharacterManager.Instance.Player.itemData = null;
     }
 
-    public void UpdateUI()
+    private void UpdateUI()
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -182,6 +179,7 @@ public class UIInventory : MonoBehaviour
     {
         for(int i = 0; i < slots.Length; i++)
         {
+            // 아이템 데이터와 슬롯의 아이템이 같고 슬롯 수량이 최대값보다 작으면
             if (slots[i].item == data && slots[i].quantity <= data.maxStackAmount)
             {
                 return slots[i];
@@ -190,7 +188,7 @@ public class UIInventory : MonoBehaviour
         return null;
     }
 
-    ItemSlot GetEmptySlot()
+    private ItemSlot GetEmptySlot()
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -212,23 +210,27 @@ public class UIInventory : MonoBehaviour
         selectedItemName.text = selectedItem.item.displayName;
         selectedItemDescription.text = selectedItem.item.description;
 
+        // 스탯 문자열은 공백으로 초기화
         selectedItemStatName.text = string.Empty;
         selectedItemStatValue.text = string.Empty;
 
+        // item이 consumable인 경우에 수치를 출력
         for(int i = 0; i< selectedItem.item.consumables.Length; i++)
         {
             selectedItemStatName.text += selectedItem.item.consumables[i].type.ToString() + "\n";
             selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString() + "\n";
         }
 
+        // 아이템이 Openable 타입이면 Openbutton 활성화
         openButton.SetActive(selectedItem.item.type == ItemType.Openable);
+        // 아이템이 지속시간이 있고 플레이어가 커진 상태라면 UseButton 비활성화
         if (selectedItem.item.hasDuration && CharacterManager.Instance.Player.isBig)
             useButton.SetActive(false);
         else
             useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
     }
 
-    void ClearSelectedItemWindow()
+    private void ClearSelectedItemWindow()
     {
         selectedItem = null;
 
@@ -239,9 +241,6 @@ public class UIInventory : MonoBehaviour
 
         useButton.SetActive(false);
         openButton.SetActive(false);
-        // equipButton.SetActive(false);
-        // unEquipButton.SetActive(false);
-        // dropButton.SetActive(false);
     }
 
     public void OnUseButton()
@@ -255,14 +254,15 @@ public class UIInventory : MonoBehaviour
                     case ConsumableType.Health:
                         condition.Heal(selectedItem.item.consumables[i].value);
                         break;
-                    case ConsumableType.Duration:
-                        CharacterManager.Instance.Player.isBig = true;
-                        useButton.SetActive(false);
+                    case ConsumableType.Duration:   // 지속시간 타입의 아이템이면
+                        CharacterManager.Instance.Player.isBig = true;  // 플레이어 커진 상태로 설정
+                        useButton.SetActive(false); // 사용 버튼 비활성화(효과 발당 중 재사용 방지)
+                        // 아이템 효과 적용하는 코루틴 시작
                         StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value, useButton));
                         break;
                 }
             }
-            RemoveSelctedItem();
+            RemoveSelctedItem();    // 사용하면 인벤토리에서 삭제
         }
     }
     
@@ -272,21 +272,15 @@ public class UIInventory : MonoBehaviour
         {
             for(int i = 0; i < selectedItem.item.packedPrefab.Length; i++)
             {
-                // switch (selectedItem.item.packedPrefab[i].type)
-                // {
-                //     case ItemType.Consumable:
-                //         break;
-                //     case ItemType.Resource:
-                //         StartCoroutine(condition.ScaleChange(selectedItem.item.consumables[i].value));
-                //         break;
-                // }
+                // 가지고 있는 아이템 정보를 인벤토리에 추가
                 AddItem(selectedItem.item.packedPrefab[i]);
             }
+            // 열고 나면 자기 자신은 인벤토리에서 없애기
             RemoveSelctedItem();
         }
     }
 
-    void RemoveSelctedItem()
+    private void RemoveSelctedItem()
     {
         selectedItem.quantity--;
 

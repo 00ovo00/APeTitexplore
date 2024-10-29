@@ -1,30 +1,31 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")] public float moveSpeed;
+    [Header("Movement")]
+    public float moveSpeed;
     private Vector2 curMovementInput;
-    public float jumpForce;
-    public float jumpPadForce;
+    public float jumpForce; // 스페이스 입력 시 점프 가중치
+    public float jumpPadForce;  // 점프대에 적용되는 점프 가중치
     public LayerMask groundLayerMask;
 
-    [Header("Size")] public Transform size;
+    [Header("Size")]
+    public Transform size;
 
     [Header("Look")]
-    //public Transform cameraContainer;
     public Transform mainCamera;
-
-    public float minXLook;
-    public float maxXLook;
-    private float camCurXRot;
-    public float lookSensitivity;
-
+    public float minXLook;  // 회전 범위 최소값
+    public float maxXLook;  // 회전 범위 최대값
+    private float camCurXRot;   // 현재 회전값
+    public float lookSensitivity;   // 민감도
     private Vector2 mouseDelta;
 
-    [HideInInspector] public bool canLook = true;
+    [HideInInspector]
+    public bool canLook = true; // 카메라 고정, 커서 활성화 여부
+    // true면 카메라 회전, 인벤토리 비활성화, 커서 비활성화
+    // false면 카메라 고정, 인벤토리 활성화, 커서 활성화
 
     private Rigidbody rigidbody;
 
@@ -98,18 +99,18 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = dir;
     }
 
-    void CameraLook()
+    private void CameraLook()
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
-        //cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
         mainCamera.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
-    bool IsGrounded()
+    private bool IsGrounded()
     {
+        // 플레이어 기준 4방향 아래로 향하는 ray(책상 다리 형태)
         Ray[] rays = new Ray[4]
         {
             new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
@@ -120,17 +121,18 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
+            // 바닥에 Raycast되면 
             if (Physics.Raycast(rays[i], 0.6f, groundLayerMask))
             {
-                return true;
+                return true;    // 땅에 붙어있는 상태로 인식
             }
         }
-
-        return false;
+        return false;   // 공중에 떠있는 상태로 인식
     }
     
     public void OnInventoryButton(InputAction.CallbackContext callbackContext)
     {
+        // Tab 키 눌렸으면
         if (callbackContext.phase == InputActionPhase.Started)
         {
             inventory?.Invoke();
@@ -139,6 +141,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnPopUpButton(InputAction.CallbackContext callbackContext)
     {
+        // X 키 눌렸으면
         if (callbackContext.phase == InputActionPhase.Started)
         {
             sheet?.Invoke();
@@ -148,20 +151,23 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleCursor()
     {
+        // 커서 상태 확인
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        // 락 상태이면 락 해제
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
-        canLook = !toggle;
+        canLook = !toggle;  // 커서 활성화 여부 토글
     }
     
     private void OnGameOverHandler()
     {
-        canLook = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        canLook = false;    // 카메라 고정
+        Cursor.lockState = CursorLockMode.None; // 락 해제
+        Cursor.visible = true;  // 커서 활성화
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        // 점프대 Collision 되면 jumpPadForce만큼 위로 순간적으로 힘을 가함
         if (other.gameObject.CompareTag("JumpPad"))
         {
             rigidbody.AddForce(Vector2.up * jumpPadForce, ForceMode.Impulse);
