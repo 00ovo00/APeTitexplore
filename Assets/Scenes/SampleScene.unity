@@ -1794,7 +1794,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   condition: {fileID: 0}
-  transform: {fileID: 0}
   isBig: 0
   itemData: {fileID: 0}
 --- !u!114 &303124712

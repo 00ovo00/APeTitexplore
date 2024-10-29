@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +10,7 @@ public interface IInteractable
 
 public class Interaction : MonoBehaviour
 {
-    public float checkRate = 0.05f;
+    public float checkRate; // 상호작용 확인 빈도
     private float lastCheckTime;
     public float maxCheckDistance;
     private int interactsLayerMask;
@@ -29,19 +28,20 @@ public class Interaction : MonoBehaviour
         interactsLayerMask = 1 << LayerMask.NameToLayer("Interactable");
     }
 
-    void Start()
+    private void Start()
     {
         playerController.sheet += OnPopUpInput;
         camera = Camera.main;
+        checkRate = 0.05f;
     }
 
-    void Update()
+    private void Update()
     {
         if(Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f));
             RaycastHit hit;
 
             if(Physics.Raycast(ray, out hit, maxCheckDistance, interactsLayerMask))
@@ -79,7 +79,8 @@ public class Interaction : MonoBehaviour
             promptText.gameObject.SetActive(false);
         }
     }
-    public void OnPopUpInput()
+    
+    private void OnPopUpInput()
     {
         UIManager.Instance.ActivateSheetPanel();
         curInteractGameObject = null;

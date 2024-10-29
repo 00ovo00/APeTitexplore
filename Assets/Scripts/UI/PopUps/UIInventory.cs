@@ -46,7 +46,7 @@ public class UIInventory : MonoBehaviour
       //  dropPosition = CharacterManager.Instance.Player.dropPosition;
 
         controller.inventory += Toggle;
-        CharacterManager.Instance.Player.addItem += AddItem;
+        CharacterManager.Instance.Player.OnAddItem += AddItem;
 
         inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
