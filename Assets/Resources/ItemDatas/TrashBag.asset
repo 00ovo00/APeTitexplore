@@ -15,7 +15,8 @@ MonoBehaviour:
   displayName: "\uC4F0\uB808\uAE30\uBD09\uD22C"
   description: "\uBB34\uC5B8\uAC00 \uB4E4\uC5B4\uC788\uC2B5\uB2C8\uB2E4"
   type: 2
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ed0bd5edb2624cc4faba1def992064ce, type: 3}
+  hasDuration: 0
   canStack: 0
   maxStackAmount: 0
   consumables: []
