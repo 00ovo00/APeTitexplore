@@ -5,19 +5,18 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
+    [Header("Movement")] public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
     public float jumpPadForce;
     public LayerMask groundLayerMask;
 
-    [Header("Size")]
-    public Transform size;
-    
+    [Header("Size")] public Transform size;
+
     [Header("Look")]
     //public Transform cameraContainer;
     public Transform mainCamera;
+
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
@@ -25,11 +24,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 mouseDelta;
 
-    [HideInInspector]
-    public bool canLook = true;
+    [HideInInspector] public bool canLook = true;
 
     private Rigidbody rigidbody;
-    
+
     public Action inventory;
     public Action sheet;
 
@@ -39,10 +37,18 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        // TODO : OnSheetClose += Toggle();
+        GameManager.Instance.OnGameOver += OnGameOverHandler;
+    }
+    
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnGameOver -= OnGameOverHandler;
+        }
     }
 
     private void FixedUpdate()
@@ -145,6 +151,13 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+    
+    private void OnGameOverHandler()
+    {
+        canLook = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void OnCollisionEnter(Collision other)

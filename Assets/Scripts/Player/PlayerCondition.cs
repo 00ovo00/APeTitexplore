@@ -50,6 +50,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke();
     }
     
+    
     public IEnumerator ScaleChange(float duration, GameObject useButton)
     {
         Vector3 originalScale = playerController.size.localScale;
