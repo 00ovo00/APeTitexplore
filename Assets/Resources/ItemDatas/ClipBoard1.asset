@@ -15,7 +15,8 @@ MonoBehaviour:
   displayName: "\uB204\uAD70\uAC00\uC758 \uD074\uB9BD\uBCF4\uB4DC"
   description: 1P
   type: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5fcfb28bb28dc434c8a182457e0af664, type: 3}
+  hasDuration: 0
   canStack: 0
   maxStackAmount: 0
   consumables: []
