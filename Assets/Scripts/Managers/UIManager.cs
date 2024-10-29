@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,6 +34,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    
     private void OnEnable()
     {
         GameManager.Instance.OnGameOver += ActivateGameOverPanel;
@@ -58,11 +56,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ActivateGameOverPanel()
+    private void ActivateGameOverPanel()
     {
         GameOverPanel.SetActive(true);
     }
-    public void ActivateGameClearPanel()
+    private void ActivateGameClearPanel()
     {
         GameClearPanel.SetActive(true);
     }

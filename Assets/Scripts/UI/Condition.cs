@@ -37,6 +37,7 @@ public class Condition : MonoBehaviour
     
     public IEnumerator DecreaseTime(float duration)
     {
+        // 아이템 지속 시간 카운트하는 코루틴
         curValue = duration;
         while (curValue >= 0)
         {
