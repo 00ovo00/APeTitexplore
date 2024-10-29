@@ -1769,8 +1769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  jumpForce: 25
-  jumpPadForce: 70
+  jumpForce: 20
+  jumpPadForce: 68
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 55
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194228}
   minXLook: -85
   maxXLook: 85
-  lookSensitivity: 0.02
+  lookSensitivity: 0.1
   canLook: 1
 --- !u!114 &303124711
 MonoBehaviour:
@@ -4479,7 +4479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  maxValue: 60
+  maxValue: 30
   startValue: 0
   passiveValue: 1
   uiBar: {fileID: 317526269}

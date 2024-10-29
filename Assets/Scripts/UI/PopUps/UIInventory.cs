@@ -63,10 +63,10 @@ public class UIInventory : MonoBehaviour
         // 시작 시 기본으로 인벤토리에 가지고 있는 아이템 정보 세팅
         defaultItems = new Dictionary<ItemData, int>();
         ItemData itemData = Resources.Load("ItemDatas/HealthDrink") as ItemData;
-        defaultItems.Add(itemData, 50);
+        defaultItems.Add(itemData, itemData.defaultAmount);
         
         itemData = Resources.Load("ItemDatas/SizeDrink") as ItemData;
-        defaultItems.Add(itemData, 10);
+        defaultItems.Add(itemData, itemData.defaultAmount);
     }
     
     private void AddStartingItems()

@@ -19,8 +19,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 160f4b91c65e2584fa42f9213b8c8dd3, type: 3}
   hasDuration: 1
   canStack: 1
-  maxStackAmount: 30
+  maxStackAmount: 10
+  defaultAmount: 5
   consumables:
   - type: 1
-    value: 60
+    value: 30
   packedPrefab: []
