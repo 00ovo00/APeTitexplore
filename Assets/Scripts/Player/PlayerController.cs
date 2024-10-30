@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     public Action inventory;
     public Action sheet;
+    public Action wallCollisionEnter;
+    public Action wallCollisionExit;
 
     private void Awake()
     {
@@ -171,6 +173,19 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("JumpPad"))
         {
             rigidbody.AddForce(Vector2.up * jumpPadForce, ForceMode.Impulse);
+        }
+        // 벽이 Collsion 되면 화면에 WallIndicator 표시
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            wallCollisionEnter?.Invoke();
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            wallCollisionExit?.Invoke();
         }
     }
 }
