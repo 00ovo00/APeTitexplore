@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8cd8e42dbb326046bb400f4218903a5, type: 3}
-  m_Name: TrashBag
+  m_Name: ClipBoard0
   m_EditorClassIdentifier: 
-  displayName: "\uC4F0\uB808\uAE30\uBD09\uD22C"
-  description: "\uBB34\uC5B8\uAC00 \uB4E4\uC5B4\uC788\uC2B5\uB2C8\uB2E4"
-  type: 2
-  icon: {fileID: 0}
+  displayName: "\uB204\uAD70\uAC00\uC758 \uD074\uB9BD\uBCF4\uB4DC"
+  description: 0A
+  type: 0
+  icon: {fileID: 21300000, guid: b34e31c7a705335459156044ac001081, type: 3}
+  hasDuration: 0
   canStack: 0
   maxStackAmount: 0
   consumables: []

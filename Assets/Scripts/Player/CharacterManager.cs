@@ -1,20 +1,5 @@
-using UnityEngine;
-
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : Singleton<CharacterManager>
 {
-    private static CharacterManager _instance;
-    public static CharacterManager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                _instance = new GameObject("CharacerManager").AddComponent<CharacterManager>();
-            }
-            return _instance;
-        }
-    }
-
     public Player Player
     {
         get { return _player; }
@@ -22,19 +7,9 @@ public class CharacterManager : MonoBehaviour
     }
     private Player _player;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if(_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            if(_instance != this)
-            {
-                Destroy(gameObject);
-            }
-        }
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
     }
 }

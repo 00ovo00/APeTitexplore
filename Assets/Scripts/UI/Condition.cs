@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,5 +33,16 @@ public class Condition : MonoBehaviour
     public float GetPercentage()
     {
         return curValue / maxValue;
+    }
+    
+    public IEnumerator DecreaseTime(float duration)
+    {
+        // 아이템 지속 시간 카운트하는 코루틴
+        curValue = duration;
+        while (curValue >= 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            Subtract(passiveValue);
+        }
     }
 }

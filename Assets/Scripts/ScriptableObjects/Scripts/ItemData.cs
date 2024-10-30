@@ -5,6 +5,7 @@ public enum ItemType
     Resource,
     Consumable,
     Openable,
+    Readable,
 }
 
 public enum ConsumableType
@@ -28,18 +29,16 @@ public class ItemData : ScriptableObject
     public string description;
     public ItemType type;
     public Sprite icon;
-    //public GameObject dropPrefab;
+    public bool hasDuration;
 
     [Header("Stacking")]
     public bool canStack;
     public int maxStackAmount;
+    public int defaultAmount;
 
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;
 
-    // [Header("Equip")]
-    // public GameObject equipPrefab;
-    
     [Header("Open")]
-    public GameObject[] packedPrefab;
+    public ItemData[] packedPrefab;
 }

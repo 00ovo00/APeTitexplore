@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8cd8e42dbb326046bb400f4218903a5, type: 3}
-  m_Name: ClipBoard1
+  m_Name: HealthDrink
   m_EditorClassIdentifier: 
-  displayName: "\uB204\uAD70\uAC00\uC758 \uD074\uB9BD\uBCF4\uB4DC"
-  description: 1P
-  type: 0
-  icon: {fileID: 0}
-  canStack: 0
-  maxStackAmount: 0
-  consumables: []
+  displayName: "\uBC25\uD55C\uC220"
+  description: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
+  type: 1
+  icon: {fileID: 21300000, guid: 0497b8caced9ed74e81a746ebfa74cb9, type: 3}
+  hasDuration: 0
+  canStack: 1
+  maxStackAmount: 50
+  defaultAmount: 10
+  consumables:
+  - type: 0
+    value: 10
   packedPrefab: []

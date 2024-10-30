@@ -9,7 +9,7 @@ public class ItemSlot : MonoBehaviour
     public UIInventory inventory;
     public Button button;
     public Image icon;
-    public TextMeshProUGUI quatityText;
+    public TextMeshProUGUI quantityText;
     private Outline outline;
 
     public int index;
@@ -30,7 +30,7 @@ public class ItemSlot : MonoBehaviour
     {
         icon.gameObject.SetActive(true);
         icon.sprite = item.icon;
-        quatityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
+        quantityText.text = quantity >= 1 ? quantity.ToString() : string.Empty;
 
         if(outline != null)
         {
@@ -42,7 +42,7 @@ public class ItemSlot : MonoBehaviour
     {
         item = null;
         icon.gameObject.SetActive(false);
-        quatityText.text = string.Empty;
+        quantityText.text = string.Empty;
     }
 
     public void OnClickButton()
